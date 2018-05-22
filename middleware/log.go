@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/middleware"
-	"github.com/satori/go.uuid"
+	"github.com/google/uuid"
 
 	"github.com/rickbassham/logging"
 )
@@ -60,7 +60,7 @@ func (l *requestLogger) Handler() func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			t1 := time.Now()
-			traceID, _ := uuid.NewV4()
+			traceID := uuid.New()
 
 			request := requestLog{
 				RequestID: middleware.GetReqID(r.Context()),
